@@ -1,23 +1,23 @@
-import os
+
 import sys
 import pandas as pd
 import numpy as np
 
-import dataclasses as dataclass
+from dataclasses import  dataclass
 from src.DimondPricePrediction.exception import customexception
 from src.DimondPricePrediction.logger import logging
 from src.DimondPricePrediction.utils.utils import save_object
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OridinalEncoder,StandardScaler
+from sklearn.preprocessing import OrdinalEncoder,StandardScaler
+import os
 
 @dataclass
 class DataTransformationConfig:
-    preprocessor_obj_path=os.path.join('artifacts','preprocessor.pkl')
+    preprocessor_obj_file_path=os.path.join('artifacts','preprocessor.pkl')
 
-
-class DataTrasformation:
+class DataTransformation:
     def __init__(self):
         self.data_transformation_config=DataTransformationConfig()
 
@@ -52,7 +52,7 @@ class DataTrasformation:
             cat_pipeline=Pipeline(
                 steps=[
                     ('imputer',SimpleImputer(strategy='most_frequent')),
-                    ('ordinalencoder',OridinalEncoder(categories=[cut_categories,color_categories,clarity_categories]))
+                    ('ordinalencoder',OrdinalEncoder(categories=[cut_categories,color_categories,clarity_categories])),
                     ('scalar',StandardScaler())
                 ]
             )
@@ -99,7 +99,7 @@ class DataTrasformation:
             test_arr = np.c_[test_preprocess, np.array(target_feature_test_df)]
             
             save_object(
-                file_path=self.data_transformation_config.preprocessor_obj_path,
+                file_path=self.data_transformation_config.preprocessor_obj_file_path,
                 obj=preprocessing_obj
             )
 

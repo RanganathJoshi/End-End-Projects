@@ -46,9 +46,9 @@ class ModelTrainer:
                     scores[list(models.keys())[i]]=score
 
 
-                    return scores
+                return scores
                 
-            model_report:dict=evaluate_model(x_train,x_test,y_train,y_test)
+            model_report:dict=evaluate_model(x_train,x_test,y_train,y_test,models)
             print(model_report)
             print('\n====================================================================================\n')
             logging.info(f"model report : {model_report}")
@@ -62,6 +62,7 @@ class ModelTrainer:
 
             print(f'Best Model Found , Model Name : {best_model_name} , R2 Score : {best_model_score}')
             print('\n====================================================================================\n')
+            logging.info(f"Model Summary :{model_report}")
             logging.info(f'Best Model Found , Model Name : {best_model_name} , R2 Score : {best_model_score}')
 
             save_object(file_path=self.model_trainer_config.trained_config,
