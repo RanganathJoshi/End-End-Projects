@@ -1,8 +1,12 @@
 import os
 import sys
 import pickle
+import yaml
+import urllib.request as request
 import numpy as np
+import zipfile
 import pandas as pd
+from pathlib import Path
 from src.DimondPricePrediction.logger import logging
 from src.DimondPricePrediction.exception import customexception
 
@@ -52,5 +56,27 @@ def load_object(file_path):
     except Exception as e:
         logging.info('Exception Occured in load_object function utils')
         raise customexception(e,sys)
-
     
+
+def read_yaml(path_to_yaml:Path):
+    with open(path_to_yaml,'r') as f:
+        contents=yaml.safe_loads(f)
+        logging.info("Yaml file loaded")
+
+        return contents
+    
+def download_data(source_file:str,destination):
+    filename, headers = request.urlretrieve(
+                url = source_file,
+                filename = destination)
+    
+    return destination
+
+def unzip_data(zip_file_path,destination):
+    os.makedirs(destination, exist_ok=True)
+    with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+        zip_ref.extractall(destination)
+
+    return destination
+
+
