@@ -2,6 +2,7 @@ from src.DimondPricePrediction.constants import *
 import yaml
 from src.DimondPricePrediction.Components.DataIngestion import DataIngestionworkflow
 import os
+import mlflow
 import zipfile
 import urllib.request as request
 path=CONFIG_FILE_PATH

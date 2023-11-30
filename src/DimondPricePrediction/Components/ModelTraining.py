@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import os
+
 import sys
 from src.DimondPricePrediction.logger import logging
 from src.DimondPricePrediction.exception import customexception
@@ -57,7 +58,7 @@ class ModelTrainer:
             best_model_name = list(model_report.keys())[
                 list(model_report.values()).index(best_model_score)
             ]
-
+ 
             best_model = models[best_model_name]
 
             print(f'Best Model Found , Model Name : {best_model_name} , R2 Score : {best_model_score}')
@@ -67,6 +68,8 @@ class ModelTrainer:
 
             save_object(file_path=self.model_trainer_config.trained_config,
                         obj=best_model)
+            
+            return self.model_trainer_config.trained_config
 
 
         except Exception as e:
