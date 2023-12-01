@@ -119,6 +119,9 @@ celerybeat.pid
 # SageMath parsed files
 *.sage.py
 
+# Ignore all files in a specific directory
+/.github/
+
 # Environments
 .env
 .venv
