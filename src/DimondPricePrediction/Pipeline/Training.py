@@ -10,7 +10,7 @@ from src.DimondPricePrediction.Components.ModelEvaluation import SaveModel
  
 obj=DataIngestionworkflow()
 train_data_path,test_data_path=obj.initiate_data_ingestion()
-mlflow_uri="https://dagshub.com/RanganathJoshi/FlightFarePrediction.mlflow"
+mlflow_uri="https://dagshub.com/RanganathJoshi/End-End-Projects.mlflow"
 #To perform Data Transformation
 data_transformation=DataTransformation()
 

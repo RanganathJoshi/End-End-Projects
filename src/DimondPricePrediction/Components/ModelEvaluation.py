@@ -16,8 +16,8 @@ class SaveModel:
 
     def log_into_mlflow(self,mlflow_uri):
         
-        mlflow.set_registry_uri(mlflow_uri)
-        tracking_url_type_store=urlparse(mlflow.get_registry_uri()).scheme
+        mlflow.set_tracking_uri(mlflow_uri)
+        tracking_url_type_store=urlparse(mlflow.get_tracking_uri()).scheme
         model=load_object(self.model_path)
         preprocessor_path=os.path.join("artifacts","preprocessor.pkl")
         preprocessor_obj=load_object(preprocessor_path)
